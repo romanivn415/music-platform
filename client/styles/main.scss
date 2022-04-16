@@ -1,0 +1,57 @@
+@import url("/typography.scss");
+
+
+:root{
+    --color-accent: #AA14F0;
+    --color-accent-focus: #8f11ca;
+    --color-background: #000000;
+    --color-white: #FFFFFF;
+    --x-gap: 5vw;
+    --y-gap: 1.5rem;
+    --color-primary: #FF5500;
+    --color-secondary: #065fd4;
+    --color-grey-30: #fafbfc;
+    --color-grey-40: #f7f8f9;
+    --color-grey-50: #f1f2f3;
+    --color-grey-60: #b1b2b3;
+    --color-grey-70: #919293;
+    --color-grey-80: #818383;
+    --color-grey-100: #717273;
+    --color-grey-200: #636567;
+    --color-grey-300: #515355;
+    --color-grey-400: #454749;
+    --color-grey-500: #3a3c3e;
+    --color-grey-600: #202326;
+    --color-grey-700: #101316;
+    --color-grey-800: #010305;
+}
+*{box-sizing: border-box;}
+body, input, button{
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-white);
+    box-sizing: border-box;
+}
+
+input, button, a{
+    border: none;
+    cursor: pointer;
+}
+input{
+    &:focus{
+        outline: 2px solid var(--color-accent);
+    }
+}
+
+h1, h2, h3, h4, h5, h6{
+    margin: 0;
+}
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.container{
+    padding-left: 15px;
+    padding-right: 15px;
+}
