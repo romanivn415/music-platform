@@ -1,9 +1,9 @@
-export {Album} from './album.schema';
-export {Artist} from './artist.schema';
-export {Comment} from './comment.schema';
-export {EP} from './ep.schema';
-export {Library} from './library.schema';
-export {Playlist} from './playlist.schema';
-export {Radio} from './radio.schema';
-export {Track} from './track.schema';
-export {User} from './user.schema';
+export {Album, AlbumSchema, AlbumDocument} from './album.schema';
+export {Artist,  ArtistSchema, ArtistDocument} from './artist.schema';
+export {Comment, CommentSchema, CommentDocument} from './comment.schema';
+export {EP, EPSchema, EPDocument} from './ep.schema';
+export {Library, LibrarySchema, LibraryDocument} from './library.schema';
+export {Playlist, PlaylistSchema, PlaylistDocument} from './playlist.schema';
+export {Radio, RadioSchema, RadioDocument} from './radio.schema';
+export {Track, TrackSchema, TrackDocument} from './track.schema';
+export {User, UserSchema, UserDocument} from './user.schema';

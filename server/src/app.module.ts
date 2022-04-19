@@ -1,19 +1,22 @@
-import { Module } from "@nestjs/common";
-import {MongooseModule} from '@nestjs/mongoose'
-import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from 'path'
-import { AppController } from "./app.controller";
-import { UserModule } from "./user/user.module";
+import 'dotenv/config'
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { MongooseModule } from '@nestjs/mongoose'
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { AuthModule } from "./auth/auth.module";
+import { UserModule } from './user/user.module';
 
 
 @Module({
-    controllers: [AppController],
     imports: [
         ServeStaticModule.forRoot({
             rootPath: path.resolve(__dirname, 'static'),
           }),
-        MongooseModule.forRoot('mongodb+srv://admin:admin@cluster0.hzbnm.mongodb.net/music-platform?retryWrites=true&w=majority'),
-        UserModule
+        MongooseModule.forRoot(process.env.DB),
+        ConfigModule.forRoot({}),
+        AuthModule,
+        UserModule,
     ]
 })
 export class AppModule {

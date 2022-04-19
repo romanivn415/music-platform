@@ -9,7 +9,7 @@ export class User{
     @Prop()
     name: string
 
-    @Prop()
+    @Prop({default: [Roles.USER]})
     roles: Roles[]
 
     @Prop({unique: true})

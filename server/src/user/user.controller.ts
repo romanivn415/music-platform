@@ -1,10 +1,13 @@
-import { Controller, Post, Body } from "@nestjs/common";
-import { User } from "src/schemas";
-import { CreateUserDto } from './dto'
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { Request } from 'express';
 
-@Controller('user')
-export class UserController{
-    @Post()
-    async create(@Body() dto: CreateUserDto){
+@Controller('users')
+export class UserController {
+
+    @UseGuards(AuthGuard('jwt'))
+    @Get('me')
+    getMe(@Req() req: Request){
+        return req.user
     }
 }
