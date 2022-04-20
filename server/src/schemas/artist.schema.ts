@@ -2,6 +2,7 @@ import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 import * as mongoose from 'mongoose'
 import { Album } from '../schemas'
+import { EP } from './ep.schema'
 
 export type ArtistDocument = Document & Artist
 
@@ -13,7 +14,8 @@ export class Artist{
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Album'}]})
   albums: Album[]
 
-
+  @Prop({type: [{type: mongoose.Schema.Types.ObjectId}], ref: 'EP'})
+  EPs: EP[]
 }
 
 export const ArtistSchema = SchemaFactory.createForClass(Artist);

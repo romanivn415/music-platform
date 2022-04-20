@@ -4,7 +4,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { Model } from 'mongoose'
-import { User, UserDocument } from "src/schemas";
+import { User, UserDocument } from "../../schemas";
 
 @Injectable()
 export class JWTStrategy extends PassportStrategy(Strategy, 'jwt'){

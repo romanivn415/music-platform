@@ -2,7 +2,7 @@ import * as brcypt from 'bcrypt'
 import { Injectable, ForbiddenException } from "@nestjs/common";
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { User, UserDocument } from "src/schemas";
+import { User, UserDocument } from "../schemas";
 import { CreateUserDto, SignInDto } from "./dto";
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose'

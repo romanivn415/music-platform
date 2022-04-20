@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { AuthModule } from "./auth/auth.module";
 import { UserModule } from './user/user.module';
+import { ArtistModule } from './artist/artist.module';
 
 
 @Module({
@@ -17,6 +18,7 @@ import { UserModule } from './user/user.module';
         ConfigModule.forRoot({}),
         AuthModule,
         UserModule,
+        ArtistModule,
     ]
 })
 export class AppModule {
