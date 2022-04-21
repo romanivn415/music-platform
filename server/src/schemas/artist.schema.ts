@@ -8,7 +8,7 @@ export type ArtistDocument = Document & Artist
 
 @Schema()
 export class Artist{
-  @Prop()
+  @Prop({unique: true})
   name: string
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Album'}]})

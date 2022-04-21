@@ -12,7 +12,7 @@ export class User{
     @Prop({default: [Roles.USER]})
     roles: Roles[]
 
-    @Prop({unique: true})
+    @Prop({unique: true, lowercase: true})
     email: string
 
     @Prop()

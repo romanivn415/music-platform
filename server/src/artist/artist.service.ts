@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Artist, ArtistDocument } from "../schemas";
-import { CreateArtistDto } from "./dto";
+import { Album, Artist, ArtistDocument } from "../schemas";
+import { AddAlbumsDto, CreateArtistDto } from "./dto";
 import { Model } from 'mongoose'
 
 @Injectable()
@@ -29,5 +29,15 @@ export class ArtistServise{
         catch(e){
             return new ForbiddenException(e.message)
         }
+    }
+
+    async addAlbums(dto: AddAlbumsDto){
+        const {artist_id, albums} = dto
+
+        const artist = await this.artistModel.findById(artist_id)
+        artist.albums.push(...albums)
+        await artist.save()
+
+        return artist
     }
 }

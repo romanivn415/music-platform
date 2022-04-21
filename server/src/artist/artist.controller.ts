@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { JwtGuard } from 'src/auth/guard';
 import { ArtistServise } from './artist.service';
-import { CreateArtistDto } from './dto';
+import { AddAlbumsDto, CreateArtistDto } from './dto';
 
 @UseGuards(JwtGuard)
 @Controller('artists')
@@ -17,5 +17,10 @@ export class ArtistController{
     @Post('create')
     create(@Body() dto: CreateArtistDto){
         return this.artistService.create(dto)
+    }
+
+    @Patch('addAlbums')
+    addAlbums(@Body() dto: AddAlbumsDto){
+        return this.addAlbums(dto)
     }
 }
