@@ -1,2 +1,2 @@
-export * from './createArtist.dto';
-export * from './add-albums.dto';
+export * from './create-artist.dto';
+export * from './update-by-id.dto'

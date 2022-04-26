@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
-import { Artist, ArtistSchema } from "src/schemas";
+import { Artist, ArtistSchema } from "../schemas";
 import { ArtistController } from "./artist.controller";
 import { ArtistServise } from "./artist.service";
 

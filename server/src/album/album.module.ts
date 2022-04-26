@@ -1,17 +1,13 @@
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose';
-import { Album, AlbumSchema, Artist, ArtistSchema } from '../schemas';
 import { AlbumController } from './album.controller';
 import { AlbumService } from './album.service';
+import { Album, AlbumSchema } from '../schemas';
+import { FileService } from '../file/file.service';
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([
-            {name: Album.name, schema: AlbumSchema}, 
-            {name: Artist.name, schema: ArtistSchema},
-        ]),
-    ],
+    imports: [ MongooseModule.forFeature([{name: Album.name, schema: AlbumSchema}]) ],
     controllers: [AlbumController],
-    providers: [AlbumService]
+    providers: [AlbumService, FileService]
 })
 export class AlbumModule{}

@@ -1,7 +1,8 @@
-import { ForbiddenException, Injectable } from "@nestjs/common";
+import { ForbiddenException, Global, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Album, Artist, ArtistDocument } from "../schemas";
-import { AddAlbumsDto, CreateArtistDto } from "./dto";
+import { ObjectId } from 'mongoose'
+import { Artist, ArtistDocument } from "../schemas";
+import { CreateArtistDto, UpdateArtistByIdDto } from "./dto";
 import { Model } from 'mongoose'
 
 @Injectable()
@@ -11,7 +12,7 @@ export class ArtistServise{
         @InjectModel(Artist.name) private artistModel: Model<ArtistDocument>
     ){}
 
-    async getById(id: string): Promise<Artist | ForbiddenException>{
+    async getById(id: ObjectId): Promise<Artist | ForbiddenException>{
         try{
             const artist = await this.artistModel.findById(id)
             return artist
@@ -31,13 +32,37 @@ export class ArtistServise{
         }
     }
 
-    async addAlbums(dto: AddAlbumsDto){
-        const {artist_id, albums} = dto
+    async updateById(id: ObjectId , dto: UpdateArtistByIdDto){
+        try{
+            const artist = await this.artistModel.findById(id)
+            await artist.updateOne(dto)
+            return await this.artistModel.findByIdAndUpdate(id)
+        }
+        catch(e){
+            return new ForbiddenException(e.message)
+        }
+    }
 
-        const artist = await this.artistModel.findById(artist_id)
-        artist.albums.push(...albums)
-        await artist.save()
+    async addAlbum(album_id: ObjectId, artist_ids: ObjectId[]){
+        const artists = await this.artistModel.updateMany({
+            _id: {$in: artist_ids}
+        }, 
+        {
+            $push: {
+                albums: album_id
+            }
+        })
 
-        return artist
+        return artists
+    }
+
+    async deleteById(id: ObjectId){
+        try{
+            const artist = await this.artistModel.findByIdAndDelete(id)
+            return artist
+        }
+        catch(e){
+            return new ForbiddenException(e.message)
+        }
     }
 }

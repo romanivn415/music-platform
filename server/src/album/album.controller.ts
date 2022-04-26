@@ -1,26 +1,37 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from "@nestjs/common";
-import { JwtGuard } from "../auth/guard";
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile,  UseGuards, UseInterceptors } from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { ObjectId } from 'mongoose'
 import { AlbumService } from "./album.service";
-import { CreateAlbumDto } from "./dto";
+import { JwtGuard } from "../auth/guard";
+import { CreateAlbumsDto } from "./dto";
+import { UpdateAlbumDto } from "./dto/update-album.dto";
 
 @UseGuards(JwtGuard)
 @Controller('albums')
 export class AlbumController{
-    constructor(private albumSevice: AlbumService){}
-
-    @Get('artist/:id')
-    getByArtistId(@Param('id') id: string){
-        
-    }
+    constructor(
+        private albumSevice: AlbumService,
+        ){}
 
     @Get(':id')
-    getById(@Param('id') id: string){
+    getById(@Param('id') id: ObjectId){
         return this.albumSevice.getById(id)
     }
 
     @Post('create')
-    create(@Body() dto: CreateAlbumDto){
-        return this.albumSevice.create(dto)
+    @UseInterceptors(FileInterceptor('cover'))
+    async create(@UploadedFile() file: Express.Multer.File,  @Body() dto: CreateAlbumsDto){
+        return await this.albumSevice.create(dto, file)
+    }
+
+    @Put('update/:id')
+    update(@Param('id') id: ObjectId, @Body() dto: UpdateAlbumDto){
+        return this.albumSevice.update(id, dto)
+    }
+
+    @Delete('delete/:id')
+    delete(@Param('id') id: ObjectId){
+        return this.albumSevice.deleteById(id)
     }
 
 }

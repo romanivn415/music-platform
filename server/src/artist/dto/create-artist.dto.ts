@@ -1,4 +1,5 @@
 import { IsArray, IsNotEmpty, IsString } from "class-validator";
+import { ObjectId } from 'mongoose'
 
 export class CreateArtistDto{
     @IsString()
@@ -6,8 +7,8 @@ export class CreateArtistDto{
     name: string
 
     @IsArray()
-    albums: []
+    albums: ObjectId[]
 
     @IsArray()
-    EPs: []
+    EPs: ObjectId[]
 }

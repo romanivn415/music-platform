@@ -12,10 +12,10 @@ export class Artist{
   name: string
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Album'}]})
-  albums: Album[]
+  albums: mongoose.Schema.Types.ObjectId[]
 
   @Prop({type: [{type: mongoose.Schema.Types.ObjectId}], ref: 'EP'})
-  EPs: EP[]
+  EPs: mongoose.Schema.Types.ObjectId[]
 }
 
 export const ArtistSchema = SchemaFactory.createForClass(Artist);

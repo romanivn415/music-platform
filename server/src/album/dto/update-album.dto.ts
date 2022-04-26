@@ -1,14 +1,18 @@
-import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 import { ObjectId } from 'mongoose'
 
-export class CreateAlbumsDto{
+
+export class UpdateAlbumDto{
+    @IsOptional()
     @IsNotEmpty()
     @IsString()
-    name: string
+    name?: string
     
     @IsOptional()
-    cover: string
-
+    @IsNotEmpty()
+    @IsString()
+    cover?: string
+    
     @IsOptional()
     @IsNotEmpty()
     @IsNumber()
@@ -22,12 +26,12 @@ export class CreateAlbumsDto{
     @IsOptional()
     @IsNotEmpty()
     @IsArray()
-    tracks?: ObjectId[]
+    feats?: ObjectId[]
 
     @IsOptional()
     @IsNotEmpty()
     @IsArray()
-    feats?: ObjectId[]
+    tracks?: ObjectId[]
 
     @IsOptional()
     @IsNotEmpty()
