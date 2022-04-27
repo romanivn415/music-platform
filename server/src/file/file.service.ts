@@ -10,7 +10,7 @@ export enum FileTypes {
 
 @Injectable()
 export class FileService{
-    createFile(type: FileTypes, file: Express.Multer.File){
+    createFile(type: FileTypes, file: Express.Multer.File): string {
         try{
             const fileExtention: string = file.originalname.split('.').pop()
             const fileName: string = uuid.v4() + '.' + fileExtention
@@ -20,6 +20,26 @@ export class FileService{
             }
             fs.writeFileSync(path.resolve(filePath, fileName), file.buffer)
             return type + '/' + fileName
+        }
+        catch(e){
+            throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    removeFile(filePath: string): string{
+        try{
+            fs.rmSync(path.resolve(__dirname, '..', 'static', filePath))
+            return filePath
+        }   
+        catch(e){
+            throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    updateFile(type: FileTypes, file: Express.Multer.File, filePath: string): string{
+        try{
+            this.removeFile(filePath)
+            return this.createFile(type, file)
         }
         catch(e){
             throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR)

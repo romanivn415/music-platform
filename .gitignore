@@ -4,6 +4,7 @@
 # compiled output
 /server/dist
 /server/.env
+/server/src/assets
 
 # Logs
 logs

@@ -25,8 +25,13 @@ export class AlbumController{
     }
 
     @Put('update/:id')
-    update(@Param('id') id: ObjectId, @Body() dto: UpdateAlbumDto){
-        return this.albumSevice.update(id, dto)
+    @UseInterceptors(FileInterceptor('cover'))
+    update(
+        @Param('id') id: ObjectId,
+        @Body() dto: UpdateAlbumDto, 
+        @UploadedFile() file: Express.Multer.File)
+    {
+        return this.albumSevice.update(id, dto, file)
     }
 
     @Delete('delete/:id')

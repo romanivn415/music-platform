@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { ArtistModule } from './artist/artist.module';
 import { AlbumModule } from './album/album.module';
 import { FileModule } from './file/file.module';
+import { TrackModule } from './track/track.module';
 
 
 @Module({
@@ -22,7 +23,8 @@ import { FileModule } from './file/file.module';
         UserModule,
         ArtistModule,
         AlbumModule,
-        FileModule
+        FileModule,
+        TrackModule
     ]
 })
 export class AppModule {

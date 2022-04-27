@@ -13,7 +13,7 @@ export class Track{
     @Prop({default: 0})
     playsNumber: number
 
-    @Prop()
+    @Prop({default: ''})
     lyrics: string
 
     @Prop()

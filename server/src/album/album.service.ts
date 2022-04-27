@@ -38,9 +38,15 @@ export class AlbumService{
         }
     }
 
-    async update(id: ObjectId ,dto: UpdateAlbumDto): Promise<Album | ForbiddenException>{
+    async update(id: ObjectId ,dto: UpdateAlbumDto, file: Express.Multer.File | null = null): 
+    Promise<Album | ForbiddenException>{
         try{
-            const album = await this.albumModel.findByIdAndUpdate(id, dto)
+            const album = await this.albumModel.findById(id)
+            if (file){
+                this.fileService.removeFile(album.cover)
+                this.fileService.createFile(FileTypes.IMAGE, file)
+            }
+            await album.updateOne(dto)
             return album
         }
         catch(e){
@@ -51,6 +57,7 @@ export class AlbumService{
     async deleteById(id: ObjectId): Promise<Album | ForbiddenException>{
         try{
             const album = await this.albumModel.findOneAndDelete({_id: id})
+            this.fileService.removeFile(album.cover)
             return album
         }
         catch(e){
